@@ -1,5 +1,5 @@
 #!/bin/bash
-LRs=( 00005 0001 0002)
+LRs=( 0.00005 0.0001 0.0002)
 BSs=( 32 80 )
 
 ID=0
@@ -16,11 +16,7 @@ do
 	SCRIPT="cd /mt/amunmt/; 
 		git pull origin gridsearch;
 		cd examples/training;
-		rm config.txt;
-		echo 'GPU 0' >> config.txt;
-		echo 'LR 0.$LR' >> config.txt;
-		echo 'BS $BS' >> config.txt;
-		nohup ./run-me.sh > /dev/null 2>&1 &
+		nohup ./run-me.sh $LR $BS > /dev/null 2>&1 &
 		"
 		
 	ssh -o StrictHostKeyChecking=no -p $PORT heafield@$IP "${SCRIPT}"
